@@ -1,0 +1,37 @@
+h1 {
+    color: #0c11ea;
+}
+
+body {
+    background-color: #efefef;
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: #000;
+    color: #fff;
+}
+
+input.custom-input:focus {
+    background-color: #e6f7ff;
+    border-color: #66b3ff;
+}
+
+.custom-input::placeholder {
+    color: #add8e6;
+}
+
+.error-message {
+    color: #f10e09;
+}
+
+.error-message:first-letter {
+    text-transform: capitalize;
+
+
+
+
+}

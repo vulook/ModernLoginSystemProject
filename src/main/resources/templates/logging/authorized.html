@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eu">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- Bootstrap and jQuery -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+
+    <title>Home page</title>
+</head>
+
+
+<body>
+<div class="container mt-5">
+    <div class="alert alert-success">
+        <strong>Success!</strong> Login Successful.
+
+        <p th:if="${#authentication.principal != null}">
+            <span th:text="'You are logged in with role: ' + ${role}"></span>
+        </p>
+    </div>
+
+    <h1 class="text-center">Who are you?</h1>
+
+    <br>
+    <br>
+
+    <div class="row d-flex justify-content-around">
+        <div class="col-md-4 mb-3 text-center flex-column justify-content-center align-items-center">
+            <form th:action="@{/student/list}" method="get">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit" class="btn btn-primary btn-lg rounded-circle text-center" style="width: 15rem; height: 15rem; font-size: 1.5rem;">STUDENT</button>
+            </form>
+            <form th:action="@{/logout}" method="post" th:if="${role eq 'ROLE_STUDENT'}">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit" class="btn btn-secondary btn-lg mt-2">Logout</button>
+            </form>
+        </div>
+
+        <div class="col-md-4 mb-3 text-center flex-column justify-content-center align-items-center">
+            <form th:action="@{/moderator/list}" method="get">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit" class="btn btn-success btn-lg rounded-circle text-center" style="width: 15rem; height: 15rem; font-size: 1.5rem;">MODERATOR</button>
+            </form>
+            <form th:action="@{/logout}" method="post" th:if="${role eq 'ROLE_MODERATOR'}">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit" class="btn btn-secondary btn-lg mt-2">Logout</button>
+            </form>
+        </div>
+
+        <div class="col-md-4 mb-3 text-center flex-column justify-content-center align-items-center">
+            <form th:action="@{/admin/list}" method="get">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit" class="btn btn-danger btn-lg rounded-circle text-center" style="width: 15rem; height: 15rem; font-size: 1.5rem;">ADMIN</button>
+            </form>
+            <form th:action="@{/logout}" method="post" th:if="${role eq 'ROLE_ADMIN'}">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit" class="btn btn-secondary btn-lg mt-2">Logout</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/webjars/jquery/3.6.4/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- Linking Bootstrap styles and main CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+
+    <title>Public Page</title>
+</head>
+
+<body>
+<footer class="footer">
+    <div class="container">
+        <!-- Display Logo -->
+        <a class="footer-logo" href="https://edu.cbsystematics.com/ua" target="_blank">
+            <img src="/img/CyberBionic-Systematics.jpg" alt="CyberBionic Systematics Logo" height="40">
+        </a>
+        <!-- Display information -->
+        <a class="footer-text" href="#"
+           style="text-decoration: none; color: #007bff; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-weight: bold; text-transform: uppercase; font-size: larger;">
+            Modern Login System Project
+        </a>
+        <!-- Display information -->
+        <span class="footer-text ml-auto">
+            - а task for the Java Developer course from CyberBionic Systematics
+        </span>
+    </div>
+</footer>
+
+<br/>
+
+<div class="bg-light container mt-4 jumbotron">
+    <h1 class="display-4">Welcome to the Public Page!</h1>
+    <p class="lead">This page is accessible to everyone.</p>
+
+    <br>
+    <br>
+
+    <!-- Number of registered users -->
+    <p class="lead" th:text="'Number of registered users: ' + ${userCount}"></p>
+
+    <br>
+
+    <!-- Link to go to the protected home page -->
+
+    <a class="link-primary" th:href="@{/authorized}" style="font-weight: bold;">Go to the secured home page</a>
+
+</div>
+
+
+</body>
+</html>
+
+

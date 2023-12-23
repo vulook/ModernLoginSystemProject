@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap and jQuery -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+
+    <title>Edit User</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="col-md-6">
+        <div class="panel panel-default rounded">
+            <div class="panel-body">
+                <h2>Edit User</h2>
+                <div class="panel-body">
+
+                    <!-- Display an error message -->
+                    <div th:if="${globalError}"
+                         class="alert alert-danger" role="alert">
+                        <span th:text="${globalError}"></span>
+                    </div>
+
+                    <form th:object="${user}" th:action="@{/admin/list/{userId}/edit(userId=${user.getId()})}" th:method="post">
+
+                        <!-- Display all error messages -->
+                        <div th:if="${error}" class="error-message">
+                            <p th:text="${error}"></p>
+                        </div>
+
+                        <!-- First Name input field with error handling -->
+                        <div class="form-group">
+                            <label for="firstName"><strong>First Name:</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user color-blue"></i>
+                                </span>
+                                <input id="firstName"
+                                       class="form-control custom-input"
+                                       th:field="*{firstName}"
+                                       required>
+                            </div>
+                            <p class="error-message"><span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span></p>
+                        </div>
+
+                        <!-- Last Name input field with error handling -->
+                        <div class="form-group">
+                            <label for="lastName"><strong>Last Name:</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user color-blue"></i>
+                                </span>
+                                <input id="lastName"
+                                       class="form-control custom-input"
+                                       th:field="*{lastName}"
+                                       required>
+                            </div>
+                            <p class="error-message"><span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span></p>
+                        </div>
+
+                        <!-- Email input field with error handling -->
+                        <div class="form-group">
+                            <label for="email"><strong>Email:</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-envelope color-blue"></i>
+                                </span>
+                                <input id="email"
+                                       class="form-control custom-input"
+                                       th:field="*{email}"
+                                       required>
+                            </div>
+                            <p class="error-message"><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></p>
+                        </div>
+
+                        <!-- Password input field with error handling -->
+                        <div class="form-group">
+                            <label for="password"><strong>Password:</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-lock color-blue"></i>
+                                </span>
+                                <input id="password"
+                                       name="password"
+                                       class="form-control custom-input"
+                                       type="password"
+                                       th:value="${user.password}"
+                                       data-password>
+                            </div>
+                    <p class="error-message"><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span></p>
+                </div>
+
+                <!-- Role dropdown menu -->
+
+                        <div class="form-group">
+                            <label for="selectedRole"><strong>Select Role:</strong></label>
+                            <select id="selectedRole" name="selectedRole" class="form-control custom-input" required>
+                                <option th:each="role : ${roles}"
+                                        th:value="${role.id}"
+                                        th:text="${role.getRoleName()}"
+                                        th:selected="${userRoles != null and #lists.contains(userRoles, role)}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="form-group">
+                            <!-- CSRF Token -->
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                            <button type="submit" class="btn btn-success btn-block">Update User</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/webjars/jquery/3.6.4/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

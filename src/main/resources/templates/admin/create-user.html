@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap and jQuery -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+
+    <title>Create User</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="col-md-6">
+        <div class="panel panel-default rounded">
+            <div class="panel-body">
+                <h2>Create User</h2>
+                <div class="panel-body">
+
+                    <!-- Display an error message -->
+                    <div th:if="${globalError}"
+                         class="alert alert-danger" role="alert">
+                        <span th:text="${globalError}"></span>
+                    </div>
+
+                    <!-- Display an error message -->
+                    <div th:if="${param.role_error}">
+                        <div class="alert alert-danger" role="alert">User role isn't selected!</div>
+                    </div>
+
+                    <form th:action="@{/admin/list/create}" th:object="${user}" method="post">
+
+                        <div th:if="${error}" class="error-message">
+                            <p th:text="${error}"></p>
+                        </div>
+
+                        <!-- First Name input field with error handling -->
+                        <div class="form-group">
+                            <label for="firstName"><strong>First Name</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user color-blue"></i>
+                                </span>
+                                <input id="firstName" class="form-control custom-input" placeholder="First name" th:field="*{firstName}"/>
+                            </div>
+                            <p class="error-message"><span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span></p>
+                        </div>
+
+                        <!-- Last Name input field with error handling -->
+                        <div class="form-group">
+                            <label for="lastName"><strong>Last Name</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user color-blue"></i>
+                                </span>
+                                <input id="lastName" class="form-control custom-input" placeholder="Last name" th:field="*{lastName}"/>
+                            </div>
+                            <p class="error-message"><span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span></p>
+                        </div>
+
+                        <!-- Email input field with error handling -->
+                        <div class="form-group">
+                            <label for="email"><strong>Email</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-envelope color-blue"></i>
+                                </span>
+                                <input id="email" class="form-control custom-input" placeholder="E-mail" th:field="*{email}"/>
+                            </div>
+                            <p class="error-message"><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></p>
+                        </div>
+
+                        <!-- Password input field with error handling -->
+                        <div class="form-group">
+                            <label for="password"><strong>Password</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-lock color-blue"></i>
+                                </span>
+                                <input id="password" class="form-control custom-input" placeholder="Password" type="password" th:field="*{password}"/>
+                            </div>
+                            <p class="error-message"><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span></p>
+                        </div>
+
+                        <!-- Role dropdown menu -->
+                        <div class="form-group">
+                            <label for="selectedRole"><strong>Select Role:</strong></label>
+                            <select id="selectedRole" name="selectedRole" class="form-control custom-input">
+                                <option value="" disabled selected>Select a role</option>
+                                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.getRoleName()}"></option>
+                            </select>
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="form-group">
+                            <!-- CSRF token -->
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                            <button type="submit" class="btn btn-success btn-block">Create User</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/webjars/jquery/3.6.4/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

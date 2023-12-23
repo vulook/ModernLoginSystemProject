@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap and jQuery -->
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+
+    <style>
+        .table-hover tbody tr:hover {
+            background-color: #ADD8E6;
+        }
+    </style>
+
+    <title>Moderator List</title>
+</head>
+
+<body>
+<div class="container">
+    <h2>Moderator List</h2>
+
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark text-center">
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="moderator : ${moderators}">
+            <td th:text="${moderator.id}"></td>
+            <td th:text="${moderator.firstName + ' ' + moderator.lastName}"></td>
+            <td th:text="${moderator.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<br>
+<br>
+
+<!-- Button to go back to the home page -->
+<form th:action="@{/authorized}" method="get">
+    <button type="submit" class="btn btn-secondary btn-lg">
+        Go Back to Home Page
+    </button>
+</form>
+
+
+<script src="/webjars/jquery/3.6.4/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

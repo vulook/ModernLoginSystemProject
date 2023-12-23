@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- Bootstrap and jQuery -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+
+    <title>Registration</title>
+</head>
+<body>
+
+<br/>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="panel panel-default rounded">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <h3><i class="glyphicon glyphicon-user" style="font-size:2em;"></i></h3>
+                        <h2 class="text-center">Register</h2>
+                        <div class="panel-body">
+
+                            <!-- Display a success message if registration is successful -->
+                            <div th:if="${param.success}">
+                                <div class="alert alert-info">
+                                    You've successfully registered!
+                                </div>
+                            </div>
+
+                            <div th:if="${param.success}">
+                                <div class="alert alert-info" role="alert">
+                                    <a href="/login" class="alert-link">You can go to the login page!</a>
+                                </div>
+                            </div>
+
+                            <!-- Registration form -->
+                            <form th:action="@{/registration}" th:object="${user}" method="post">
+
+                                <!-- Display global error messages -->
+                                <p class="error-message"
+                                   th:if="${#fields.hasGlobalErrors()}"
+                                   th:each="error : ${#fields.errors('global')}"
+                                   th:text="${error}">Validation error</p>
+
+                                <!-- First Name input field with error handling -->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user color-blue"></i>
+                                        </span>
+                                        <label for="firstName"></label>
+                                        <input id="firstName"
+                                               class="form-control custom-input"
+                                               placeholder="First name"
+                                               th:field="*{firstName}"/>
+                                    </div>
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors('firstName')}" th:text="${err}" class="error-message" />
+                                    </ul>
+                                </div>
+
+                                <!-- Last Name input field with error handling -->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user color-blue"></i>
+                                        </span>
+                                        <label for="lastName"></label>
+                                        <input id="lastName"
+                                               class="form-control custom-input"
+                                               placeholder="Last name"
+                                               th:field="*{lastName}"/>
+                                    </div>
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors('lastName')}" th:text="${err}" class="error-message" />
+                                    </ul>
+                                </div>
+
+                                <!-- Email input field with error handling -->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user color-blue"></i>
+                                        </span>
+                                        <label for="email"></label>
+                                        <input id="email"
+                                               class="form-control custom-input"
+                                               placeholder="E-mail"
+                                               th:field="*{email}"/>
+                                    </div>
+                                    <li th:each="err : ${#fields.errors('email')}" th:text="${err}" class="error-message" />
+                                </div>
+
+                                <!-- Confirm Email input field with error handling -->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user color-blue"></i>
+                                        </span>
+                                        <label for="confirmEmail"></label>
+                                        <input id="confirmEmail"
+                                               class="form-control custom-input"
+                                               placeholder="Confirm e-mail"
+                                               th:field="*{confirmEmail}"/>
+                                    </div>
+                                    <li th:each="err : ${#fields.errors('confirmEmail')}" th:text="${err}" class="error-message" />
+                                </div>
+
+                                <!-- Password input field with error handling -->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user color-blue"></i>
+                                        </span>
+                                        <label for="password"></label>
+                                        <input id="password"
+                                               class="form-control custom-input"
+                                               placeholder="password"
+                                               type="password"
+                                               th:field="*{password}"/>
+                                    </div>
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors('password')}" th:text="${err}" class="error-message" />
+                                    </ul>
+                                </div>
+
+                                <!-- Confirm Password input field with error handling -->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user color-blue"></i>
+                                        </span>
+                                        <label for="confirmPassword"></label>
+                                        <input id="confirmPassword"
+                                               class="form-control custom-input"
+                                               type="password"
+                                               placeholder="Confirm password"
+                                               th:field="*{confirmPassword}"/>
+                                    </div>
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}" class="error-message" />
+                                    </ul>
+                                </div>
+
+                                <!-- Checkbox for agreeing to terms with error handling -->
+                                <div class="form-group"
+                                     th:classappend="${#fields.hasErrors('checkbox')}? 'has-error':''">
+                                    <label for="checkbox"></label>
+                                    <input id="checkbox"
+                                           type="checkbox"
+                                           th:field="*{checkbox}"/>  
+
+                                    <label class="control-label" for="checkbox">
+                                        I agree with the <a href="#" data-toggle="modal" data-target="#termsModal">terms
+                                        and conditions</a> for Registration.
+                                    </label>
+
+                                    <p th:if="${#fields.hasErrors('checkbox')}" class="error-message" >
+                                        You must agree to the terms and conditions.
+                                    </p>
+                                </div>
+
+                                <!-- Modal for terms and conditions -->
+                                <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="myFirstModal" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title" id="myFirstModal">Terms and Conditions</h1>
+                                            </div>
+                                            <div class="modal-body" style="width: 100%; text-align: justify; font-size: 0.9em;">
+                                                <h3>Welcome to our platform!</h3>
+
+                                                <p>By accessing or using our platform, you agree to be bound by these Terms and Conditions ("Terms"). If
+                                                    you do not agree to all the Terms, you may not access or use the platform.</p>
+
+                                                <h3>1. Definitions</h3>
+                                                <p><strong>Platform:</strong> refers to the website, mobile application, and all other services provided by us.</p>
+                                                <p><strong>User:</strong> refers to you, the individual accessing or using the platform.</p>
+                                                <p><strong>Content:</strong> refers to any text, images, videos, audio, or other materials submitted or displayed on the platform.</p>
+
+                                                <h3>2. User Account and Registration</h3>
+                                                <ol>
+                                                    <li>To access certain features of the platform, you may be required to create an account.</li>
+                                                    <li>You are responsible for maintaining the confidentiality of your account information, including your password.</li>
+                                                    <li>You agree to be responsible for all activities that occur under your account.</li>
+                                                </ol>
+
+                                                <h3>3. Acceptable Use</h3>
+                                                <p>You agree to use the platform only for lawful purposes.</p>
+                                                <p>You agree not to use the platform to:</p>
+                                                <ul>
+                                                    <li>Upload or transmit any Content that is illegal, harmful, threatening, abusive, harassing, tortious, defamatory, vulgar, obscene, libelous, invasive of another privacy, hateful, or racially, ethnically or otherwise objectionable.</li>
+                                                    <li>Infringe upon the intellectual property rights of others.</li>
+                                                    <li>Upload or transmit viruses or other harmful codes.</li>
+                                                    <li>Interfere with or disrupt the platform or servers or networks connected to the platform.</li>
+                                                    <li>Attempt to gain unauthorized access to the platform, other accounts, computer systems or networks connected to the platform.</li>
+                                                    <li>Use the platform for any commercial purpose without our express written consent.</li>
+                                                </ul>
+
+                                                <h3>4. Content</h3>
+                                                <p>You retain all ownership rights to the Content you submit to the platform.</p>
+                                                <p>By submitting Content to the platform, you grant us a non-exclusive, royalty-free, worldwide license to use, reproduce, modify, publish, translate, distribute, and display such Content.</p>
+                                                <p>You are responsible for the accuracy, completeness, and legality of any Content you submit.</p>
+
+                                                <h3>5. Termination</h3>
+                                                <p>We may terminate your access to the platform at any time, for any reason, without notice.</p>
+
+                                                <h3>6. Entire Agreement</h3>
+                                                <p>These Terms constitute the entire agreement between you and us regarding your use of the platform.</p>
+
+                                                <p><strong>Please note:</strong> This is a sample terms and conditions document and may need to be modified to fit the specific needs of your platform. You should consult with an attorney to ensure that your terms and conditions are legally compliant.</p>
+
+                                                <!-- Button to close the modal -->
+                                                <button type="button" class="btn btn-secondary btn-lg btn-block" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Register button -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-block">Register</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Links for already registered users and password reset -->
+                <div class="col-md-12">
+                    Already registered? <a th:href="@{/login}">Login</a>
+                </div>
+                <div class="col-md-12">
+                    Forgot password? <a th:href="@{/forgot-password}">Reset password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/webjars/jquery/3.6.4/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
