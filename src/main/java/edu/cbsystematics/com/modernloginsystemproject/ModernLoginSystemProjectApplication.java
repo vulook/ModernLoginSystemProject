@@ -13,6 +13,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * FileName: ModernLoginSystemProjectApplication
+ * Author:   Andriy Vulook
+ * Date:     01.12.2023 01:41
+ * Description: ModernLoginSystemProjectApplication
+ */
 
 @SpringBootApplication
 public class ModernLoginSystemProjectApplication {
@@ -28,7 +34,7 @@ public class ModernLoginSystemProjectApplication {
     }
 
     // Creating default users for display on the login page
-    public static List<List<String>> defaultUsersList = new ArrayList<>();
+    public static final List<List<String>> defaultUsersList = new ArrayList<>();
 
 
     public static void main(String[] args) {
