@@ -3,9 +3,11 @@
 
 The *ModernLoginSystemProject* project is a web application developed using the Spring Boot framework. It demonstrates controlled access to resources based on user roles. Users can identify themselves in the system, and administrators can manage their roles and update their passwords. There is also the ability to recover forgotten passwords. To test the project, run it in a local environment. After launching the project, open the following link in your browser: http://localhost:8080.
 
-___
+---
 
 ![img_1.png](img/img_1.png)
+
+---
 
 **Project Structure:**
 
@@ -28,9 +30,12 @@ The project includes various packages and classes for better organization and co
 **security:** A package containing security settings, including role-based access configuration.
 
 **exception:** A package containing exception handlers for exceptions that may occur during user actions.
-___
+
+---
 
 <img src="img/img_3.png" alt="alt text" width="500" height="370">
+
+---
 
 ### Execution
 
@@ -42,7 +47,11 @@ The project offers users the following functionality:
 - The system uses an email service to send a temporary token for password reset.
 - A unique token with a limited expiration is generated and sent in an email with a password reset link.
 
+---
+
 <img src="img/img_4.png" alt="alt text" width="900" height="300">
+
+---
 
 *Roles and Security Settings:*
 - The project uses a role system to restrict user access.
@@ -74,6 +83,7 @@ The project offers users the following functionality:
 - Choosing a role leads to redirection to a page specific to that role.
 - If the user selects a button that does not match his role, it will be redirected to the Access Denied page.
 
+---
 
 ![img_2.png](img/img_2.png)
 
